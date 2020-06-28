@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/ts-mocha/bin/ts-mocha -p ./tsconfig.json ./**/*.test.ts -w --watch-extensions ts",
+    "start": "./node_modules/ts-mocha/bin/ts-mocha -p ./tsconfig.json ./**/*.test[s].ts -w --watch-extensions ts",
     "test": "nyc mocha '**\\*.test[s].ts'"
   },
   "nyc": {

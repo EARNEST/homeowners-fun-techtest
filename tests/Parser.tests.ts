@@ -54,6 +54,15 @@ describe("Given a format for a single person", () => {
 describe("Given a format for multiple people", () => {
   const multiMappings = [
     {
+      raw: "Mr,Dr &Father and Captain Marvel",
+      data: [
+        new Person("Mr", "Marvel", undefined, undefined),
+        new Person("Dr", "Marvel", undefined, undefined),
+        new Person("Father", "Marvel", undefined, undefined),
+        new Person("Captain", "Marvel", undefined, undefined),
+      ],
+    },
+    {
       raw: "Mrs and Mr Marsh",
       data: [
         new Person("Mrs", "Marsh", undefined, undefined),
