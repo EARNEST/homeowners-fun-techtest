@@ -15,4 +15,15 @@ export class Person {
     this.initial = initial;
     this.first_name = first_name;
   }
+
+  public toString(): string{
+    const parts = [
+      this.title,
+      this.first_name,
+      this.initial,
+      this.last_name
+    ];
+
+    return parts.filter(p => p !== undefined).join(" ");
+  }
 }

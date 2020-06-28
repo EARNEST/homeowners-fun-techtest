@@ -3,7 +3,7 @@ import { expect } from "chai";
 import itParam from "mocha-param";
 import { Person } from "../app/Person";
 
-describe("Given an empty value", () => {
+describe("Given an empty value", () => {  
   it("should parse to empty array of people", () => {
     const sut = new Parser();
 
@@ -38,7 +38,7 @@ describe("Given a format for a single person", () => {
   ];
 
   itParam(
-    "should parse format '${value.raw}' to person schema",
+    "should parse '${value.raw}' => '${value.data}'",
     singleMappings,
     (mapping) => {
       const sut = new Parser();
@@ -101,7 +101,7 @@ describe("Given a format for multiple people", () => {
   ];
 
   itParam(
-    "should parse format '${value.raw}' to multi-person schema",
+    "should parse '${value.raw}' => '${value.data}'",
     multiMappings,
     (mapping) => {
       const sut = new Parser();
