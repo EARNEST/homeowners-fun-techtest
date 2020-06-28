@@ -9,7 +9,7 @@ export class Parser {
       return [];
     }
 
-    const values = rawValue
+    const people = rawValue
       .split(this.splitterRegex)
       .map((v) =>
         v
@@ -17,19 +17,11 @@ export class Parser {
           .split(" ")
           .filter((v) => v.length !== 0)
       )
-      .reverse()
       .map((parts) => this.toPerson(parts));
 
-    values.reduce((prev, curr) => {
-      if (curr.last_name === "") {
-        curr.last_name = prev.last_name;
-        return prev;
-      }
+    this.fillInLastNameWhereMissing(people);
 
-      return curr;
-    });
-
-    return values.reverse();
+    return people;
   }
 
   private toPerson(parts: string[]): Person {
@@ -41,6 +33,18 @@ export class Parser {
     return new Person(title, lastName, initial, firstName);
   }
 
+  private fillInLastNameWhereMissing(people: Person[]): void {
+    // can use better ways, but this will do
+    [...people].reverse().reduce((prev, curr) => {
+      if (curr.last_name === "") {
+        curr.last_name = prev.last_name;
+        return prev;
+      }
+
+      return curr;
+    });
+  }
+
   private getTitle(parts: string[]): string {
     return parts[0];
   }
@@ -50,9 +54,9 @@ export class Parser {
   }
 
   private getFirstName(parts: string[]): string | undefined {
-    const optionals = [...parts].splice(1, parts.length - 2);
-    const nameParts = optionals.filter((v) => !this.isInitial(v));
-
+    const nameParts = this.getOptionals(parts).filter(
+      (v) => !this.isInitial(v)
+    );
     if (nameParts.length === 0) {
       return undefined;
     }
@@ -61,9 +65,7 @@ export class Parser {
   }
 
   private getInitial(parts: string[]): string | undefined {
-    const optionals = [...parts].splice(1, parts.length - 2);
-    const initials = optionals.filter((v) => this.isInitial(v));
-
+    const initials = this.getOptionals(parts).filter((v) => this.isInitial(v));
     if (initials.length === 0) {
       return undefined;
     }
@@ -73,6 +75,10 @@ export class Parser {
     }
 
     return initials[0].replace(".", "");
+  }
+
+  private getOptionals(parts: string[]): string[] {
+    return [...parts].splice(1, parts.length - 2);
   }
 
   private isInitial(value: string): boolean {
