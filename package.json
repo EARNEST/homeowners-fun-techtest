@@ -1,0 +1,40 @@
+{
+  "name": "homeowner-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/ts-mocha/bin/ts-mocha -p ./tsconfig.json ./**/*.test.ts -w --watch-extensions ts",
+    "test": "nyc mocha '**\\*.test[s].ts'"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "all": true,
+    "sourceMap": true,
+    "instrument": true
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "nyc": "^15.1.0",
+    "ts-mocha": "^7.0.0",
+    "mocha-param": "^2.0.1",
+    "typescript": "^3.9.5"
+  }
+}
