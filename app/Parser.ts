@@ -1,7 +1,6 @@
 import { Person } from "./Person";
 
 export class Parser {
-  private readonly splitters: string[] = ["&", "and", ","];
   private readonly splitterRegex = /\&|\sand\s|\,/g;
   private readonly initialRegex = /^(?<initial>.{1})\.{0,1}$/;
 
@@ -33,7 +32,7 @@ export class Parser {
     return values.reverse();
   }
 
-  private toPerson(parts: string[]) {
+  private toPerson(parts: string[]): Person {
     const title = this.getTitle(parts);
     const lastName = this.getLastName(parts);
     const firstName = this.getFirstName(parts);
